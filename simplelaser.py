@@ -51,10 +51,9 @@ class Model:
 
     def __init__(self,paths):
         self.current_state = (0,0,0,100) # x,y,on/off,power
-        if paths:
-            self.paths = paths
-            self.buildPaths()
-            self.expandPaths()
+        self.paths = paths
+        self.buildPaths()
+        self.expandPaths()
 
     def getData(self):
         return self.steps
