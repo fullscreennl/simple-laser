@@ -51,9 +51,10 @@ class Model:
 
     def __init__(self,paths):
         self.current_state = (0,0,0,100) # x,y,on/off,power
-        self.paths = paths
-        self.buildPaths()
-        self.expandPaths()
+        if paths:
+            self.paths = paths
+            self.buildPaths()
+            self.expandPaths()
 
     def getData(self):
         return self.steps
@@ -107,11 +108,11 @@ class Model:
         y_arr = [step for st in range(abs(delta_y))]
 
         if len(y_arr) > len(x_arr):
-            x = self.spaceStepsArray(x_arr,len(y_arr))
+            x = self.stretchTo(x_arr,len(y_arr))
             y = y_arr
         else:
             x = x_arr
-            y = self.spaceStepsArray(y_arr,len(x_arr))
+            y = self.stretchTo(y_arr,len(x_arr))
 
         length = len(x)
 
@@ -129,37 +130,20 @@ class Model:
         x,y = (float(coord[0]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM , (float(coord[1]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM
         return int(round(x)),int(round(y))
 
-    def spaceStepsArray(self,arr,target_length):
-        new_arr = []
+    #http://stackoverflow.com/questions/12991962/stretching-a-list-in-python
+    def stretchTo(self,arr, target_length):
+
         l = len(arr)
         if l == 0:
             return [1 for i in range(abs(target_length))]
         if l == target_length:
             return arr
-        numspaces = target_length - l
-        space_width = float(numspaces) / float(l)
-        floored_space_width = int(math.floor(space_width))
-        remain = target_length - (floored_space_width+1)*l
-        space_arr = [1 for i in range(abs(floored_space_width))]
-        remain_arr = [1 for i in range(abs(remain))]
 
-        if floored_space_width == 0:
-            spreadfactor = int(math.floor(float(l) / float(remain)))
-            counter = 0
-            remaincounter = 0
-            for elem in arr:
-                counter += 1
-                new_arr = new_arr + [elem]
-                if counter%spreadfactor == 0 and remaincounter < remain: 
-                    new_arr = new_arr + [1] 
-                    remaincounter += 1
-                    counter = 0
-        else:   
-            for elem in arr:
-                new_arr = new_arr + [elem] + space_arr
-            new_arr = new_arr + remain_arr
-
-        return new_arr
+        out = [1] * target_length
+        m = len(arr)
+        for i, x in enumerate(arr):
+            out[i*(target_length-1)//(m-1)] = x
+        return out
 
 class Coder:
     def __init__(self):
@@ -186,7 +170,7 @@ class Simulator:
             x = (x_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
             y = (y_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
             x = int(round(x))
-            y = int(round(y))
+            y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
             if d[2]:
                 self.draw.ellipse((x,y,x+1,y+1),fill=(0,0,0,255))
             else:
