@@ -177,7 +177,7 @@ class Simulator:
             if d[2]:
                 self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
             else:
-                self.draw.rectangle((x-5,y-5,x+9,y+9),fill=(255,220,255,0))
+                self.draw.rectangle((x-5,y-5,x+9,y+9),fill=(255,220,255,200))
         self.canvas.show()
 
     def valueForStep(self,d,index):
