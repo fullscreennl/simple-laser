@@ -36,9 +36,14 @@ class SimpleLaser:
                 raise Exception("oops, can not convert eps file")
 
         doc = minidom.parse(svg_filename)
-        path_strings = [(path.getAttribute('stroke'),path.getAttribute('points'),"polygon") for path in doc.getElementsByTagName('polygon')]
-        path_strings += [(path.getAttribute('stroke'),path.getAttribute('points'),"polyline") for path in doc.getElementsByTagName('polyline')]
-        path_strings += [self.lineToPathString(path) for path in doc.getElementsByTagName('line')]
+        path_strings = []
+
+        for elem in doc.getElementsByTagName('g')[0].childNodes:
+            if elem.nodeType != elem.TEXT_NODE and elem.getAttribute('stroke') != "white":
+                if elem.tagName == "line":
+                    path_strings += [self.lineToPathString(elem)]
+                else:
+                    path_strings += [(elem.getAttribute('stroke'),elem.getAttribute('points'),elem.tagName)]
 
         return path_strings
 
@@ -63,8 +68,6 @@ class Model:
         coords = None
         self.translated_paths = []
         for p in self.paths:
-            if p[0] == "white":
-                continue
             if coords:
                 self.current_state = coords[-1]
             coords = []
@@ -76,7 +79,6 @@ class Model:
                     coords.append(self.translate(xy)+(1,power))
             if path_type == "polygon":
                 coords.append(coords[0])
-            print [self.current_state[:2]+(0,0),coords[0][:2]+(0,0)]
             self.translated_paths += [self.current_state[:2]+(0,0),coords[0][:2]+(0,0)]
             self.translated_paths += coords
 
@@ -177,8 +179,8 @@ class Simulator:
             if d[2]:
                 self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
             else:
-                self.draw.rectangle((x-5,y-5,x+9,y+9),fill=(255,220,255,200))
-        self.canvas.show()
+                self.draw.ellipse((x-5,y-5,x+9,y+9),fill=(255,0,0,128))
+        self.canvas.save("simulated_output.png")
 
     def valueForStep(self,d,index):
         v = d[index]
