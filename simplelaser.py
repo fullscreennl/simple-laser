@@ -7,8 +7,8 @@ import numpy as np
 
 MACHINE_SIZE = (1250,900)
 STEPS_PER_MM = 100.0
-SVG_UNITS_TO_MM_RATIO = 114.97 / 1250.0
-COLOR_TO_POWER_MAP = {"lime":30,"red":80,"blue":25,"yellow":50,"#288cf0":23}
+SVG_UNITS_TO_MM_RATIO = 427.62 / 1250.0
+COLOR_TO_POWER_MAP = {"white":0,"lime":30,"red":80,"blue":25,"yellow":50,"#288cf0":23}
 SIMULATOR_PIXELS_PER_MM = 5
  
 class SimpleLaser:
@@ -24,7 +24,7 @@ class SimpleLaser:
 
             svg_filename = eps_filename.replace(".eps",".svg")
 
-            command = ["pstoedit -f plot-svg",eps_filename,svg_filename,"-nc"]
+            command = ["pstoedit -f plot-svg",eps_filename,svg_filename,"-flat 0 -nc"]
             command = string.join(command)
 
             try:
@@ -50,10 +50,11 @@ class SimpleLaser:
 class Model:
 
     def __init__(self,paths):
-        self.current_state = (0,0,0,100) # x,y,on/off,power
-        self.paths = paths
-        self.buildPaths()
-        self.expandPaths()
+        if paths:
+            self.current_state = (0,0,0,100) # x,y,on/off,power
+            self.paths = paths
+            self.buildPaths()
+            self.expandPaths()
 
     def getData(self):
         return self.steps
@@ -62,6 +63,8 @@ class Model:
         coords = None
         self.translated_paths = []
         for p in self.paths:
+            if p[0] == "white":
+                continue
             if coords:
                 self.current_state = coords[-1]
             coords = []
@@ -73,6 +76,7 @@ class Model:
                     coords.append(self.translate(xy)+(1,power))
             if path_type == "polygon":
                 coords.append(coords[0])
+            print [self.current_state[:2]+(0,0),coords[0][:2]+(0,0)]
             self.translated_paths += [self.current_state[:2]+(0,0),coords[0][:2]+(0,0)]
             self.translated_paths += coords
 
@@ -122,8 +126,6 @@ class Model:
 
         return np.column_stack((x_arr,y_arr,state_arr,power_arr)) 
 
-
-
     def translate(self,coord):
         coord = coord.split(",")
         x,y = (float(coord[0]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM , (float(coord[1]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM
@@ -133,15 +135,17 @@ class Model:
     def stretchTo(self,arr, target_length):
 
         l = len(arr)
+        out = [1] * target_length
         if l == 0:
-            return [1 for i in range(abs(target_length))]
+            return out
+        if l == 1:
+            out[(target_length-1)//2] = arr[0]
+            return out
         if l == target_length:
             return arr
 
-        out = [1] * target_length
-        m = len(arr)
         for i, x in enumerate(arr):
-            out[i*(target_length-1)//(m-1)] = x
+            out[i*(target_length-1)//(l-1)] = x
         return out
 
 class Coder:
@@ -171,9 +175,9 @@ class Simulator:
             x = int(round(x))
             y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
             if d[2]:
-                self.draw.ellipse((x,y,x+1,y+1),fill=(0,0,0,255))
+                self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
             else:
-                self.draw.rectangle((x,y,x+1,y+1),fill=(255,220,255,255))
+                self.draw.rectangle((x-5,y-5,x+9,y+9),fill=(255,220,255,0))
         self.canvas.show()
 
     def valueForStep(self,d,index):
@@ -188,6 +192,7 @@ class Simulator:
 
 if __name__ == "__main__":
     SimpleLaser("test_laser_job.eps")
+
 
 
 
