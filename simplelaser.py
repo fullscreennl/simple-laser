@@ -7,15 +7,15 @@ import numpy as np
 
 MACHINE_SIZE = (1250,900)
 STEPS_PER_MM = 100.0
-SVG_UNITS_TO_MM_RATIO = 427.62 / 1250.0
 COLOR_TO_POWER_MAP = {"white":0,"lime":30,"red":80,"blue":25,"yellow":50,"#288cf0":23}
 SIMULATOR_PIXELS_PER_MM = 5
  
 class SimpleLaser:
 
     def __init__(self,eps_filename=None):
+        self.svg_units_to_mm_ratio = 1
         paths = self.openJob(eps_filename)
-        self.model = Model(paths)
+        self.model = Model(paths,self.svg_units_to_mm_ratio)
         self.simulator = Simulator(self.model.getData())
 
     def openJob(self,eps_filename):
@@ -44,8 +44,15 @@ class SimpleLaser:
                     path_strings += [self.lineToPathString(elem)]
                 else:
                     path_strings += [(elem.getAttribute('stroke'),elem.getAttribute('points'),elem.tagName)]
-
+            elif elem.nodeType != elem.TEXT_NODE and elem.getAttribute('stroke') == "white":
+                self.setUnitsToMMRatio(elem)
+                
         return path_strings
+
+    def setUnitsToMMRatio(self,marker_xml):
+        x1 = float(marker_xml.getAttribute('x1'))
+        x2 = float(marker_xml.getAttribute('x2'))
+        self.svg_units_to_mm_ratio = abs(x1 - x2) / 1250.0
 
     def lineToPathString(self,line_xml):
         path_string = u"%s,%s %s,%s"%(line_xml.getAttribute('x1'),line_xml.getAttribute('y1'),line_xml.getAttribute('x2'),line_xml.getAttribute('y2')) 
@@ -54,10 +61,11 @@ class SimpleLaser:
 
 class Model:
 
-    def __init__(self,paths):
+    def __init__(self,paths,svg_units_to_mm_ratio):
         if paths:
             self.current_state = (0,0,0,100) # x,y,on/off,power
             self.paths = paths
+            self.svg_units_to_mm_ratio = svg_units_to_mm_ratio
             self.buildPaths()
             self.expandPaths()
 
@@ -130,7 +138,7 @@ class Model:
 
     def translate(self,coord):
         coord = coord.split(",")
-        x,y = (float(coord[0]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM , (float(coord[1]) / SVG_UNITS_TO_MM_RATIO) * STEPS_PER_MM
+        x,y = (float(coord[0]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM , (float(coord[1]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM
         return int(round(x)),int(round(y))
 
     #http://stackoverflow.com/questions/12991962/stretching-a-list-in-python
