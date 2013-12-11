@@ -4,6 +4,8 @@ import math
 import Image, ImageDraw
 from xml.dom import minidom
 import numpy as np
+import struct
+import traceback
 
 MACHINE_SIZE = (1250,900)
 STEPS_PER_MM = 100.0
@@ -16,7 +18,7 @@ class SimpleLaser:
         self.svg_units_to_mm_ratio = 1
         paths = self.openJob(eps_filename)
         self.model = Model(paths,self.svg_units_to_mm_ratio)
-        self.simulator = Simulator(self.model.getData())
+        self.generator = Generator(self.model.getData())
 
     def openJob(self,eps_filename):
         svg_filename = None
@@ -91,7 +93,7 @@ class Model:
             self.translated_paths += coords
 
     def expandPaths(self):
-        self.steps = np.array([(0,0,0,0)], dtype=np.int)
+        self.steps = np.array([(0,0,0,0,0)], dtype=np.int)
         prev = self.translated_paths[0]
         for p in self.translated_paths:
             delta_x = p[0] - prev[0]
@@ -99,11 +101,11 @@ class Model:
             state = p[2]
             power = p[3]
             if abs(delta_x) + abs(delta_y) > 0:
-                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power)
+                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power,20)
                 self.steps = np.concatenate((self.steps,numpy_arr))
             prev = p
 
-    def expandWithLaserStateAndPower(self,delta_x,delta_y,state,power):
+    def expandWithLaserStateAndPower(self,delta_x,delta_y,state,power,speed):
 
         x = None
         y = None
@@ -133,8 +135,9 @@ class Model:
         y_arr = np.array(y)
         state_arr = np.zeros((length,), dtype=np.int) + state
         power_arr = np.zeros((length,), dtype=np.int) + power
+        speed_arr = np.zeros((length,), dtype=np.int) + speed
 
-        return np.column_stack((x_arr,y_arr,state_arr,power_arr)) 
+        return np.column_stack((x_arr,y_arr,state_arr,power_arr,speed_arr)) 
 
     def translate(self,coord):
         coord = coord.split(",")
@@ -159,49 +162,132 @@ class Model:
         return out
 
 class Coder:
-    def __init__(self):
-        pass
+
+    #[ x y laser power speed]  
+    #[ 0 0 1 30 499]
+    def encode(self,data):
+        x, y,laser,power,speed = data
+        enc = 0 << 22
+        enc = enc | (x << 20)
+        enc = enc | (y << 18)
+        enc = enc | (laser << 16)
+        enc = enc | (power << 9)
+        enc = enc | (speed << 0)
+        return enc
+        
+    def decode(self,data):
+
+        mask =          0b1100000000000000000000
+        power_mask =    0b0000001111111000000000
+        speed_mask =    0b0000000000000111111111
+
+        #print "power_mask ",power_mask
+        #print "speed_mask ",speed_mask
+
+        x = (data & mask) >> 20
+        y = (data & mask >> 2) >> 18
+        laser = (data & mask >> 4) >> 16
+        power = (data & power_mask) >> 9
+        speed = (data & speed_mask)
+
+        return (x, y,laser,power,speed)
 
 class Generator:
-    def __init__(self):
-        pass
+    def __init__(self,data):
+        self.coder = Coder()
+        binfile = open("laserjob.bin","wb")
+        for d in data:
+            sample = struct.pack('=L',self.coder.encode(tuple(d)))
+            binfile.write(sample)
+        binfile.close()
 
 class Easer:
     def __init__(self):
         pass
 
 class Simulator:
-    def __init__(self,data):
-        x_steps = 0
-        y_steps = 0
+
+    def __init__(self,laser_job_filename = "laserjob.bin"):
         w,h = MACHINE_SIZE
         self.canvas = Image.new('RGBA',(int(w*SIMULATOR_PIXELS_PER_MM),int(h*SIMULATOR_PIXELS_PER_MM)),(255,255,255,255))
         self.draw = ImageDraw.Draw(self.canvas)
-        for d in data:
-            x_steps += self.valueForStep(d,0)
-            y_steps += self.valueForStep(d,1) 
-            x = (x_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
-            y = (y_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
-            x = int(round(x))
-            y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
-            if d[2]:
-                self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
-            else:
-                self.draw.ellipse((x-5,y-5,x+9,y+9),fill=(255,0,0,128))
+        self.readLaserJob(laser_job_filename)
         self.canvas.save("simulated_output.png")
 
-    def valueForStep(self,d,index):
-        v = d[index]
-        if v == 0:
+    def write(self,msg):
+        print msg
+
+    def readLaserJob(self,laser_job_filename):
+        x_steps = 0
+        y_steps = 0
+        coder = Coder()
+        self.motiondata = open(laser_job_filename,'rb')
+        try:
+            byte = self.motiondata.read(4)
+            while byte != "":
+                sample = struct.unpack('=L',byte)
+                x,y,laser,power,speed = coder.decode(sample[0])
+                x_steps += self.valueForStep(x)
+                y_steps += self.valueForStep(y) 
+                x = (x_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
+                y = (y_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
+                x = int(round(x))
+                y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
+                if laser:
+                    self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
+                else:
+                    self.draw.ellipse((x-5,y-5,x+9,y+9),fill=(255,0,0,128))
+
+                byte = self.motiondata.read(4)
+        except:
+            print "WARNING LASER ERROR !!"
+            traceback.print_exc(self)
+
+    def valueForStep(self,d):
+        if d == 0:
             return -1
-        elif v == 2:
+        elif d == 2:
             return 1
         else:
             return 0
 
+#some TDD a day to keep the doctor away
+def testCoder():
+    coder = Coder()
+    test_set = [(3,3,0,100,499),
+                  (1,3,0,23,200),
+                  (0,0,1,10,300),
+                  (2,3,0,0,10),
+                  (3,2,1,99,20),
+                  (1,3,1,34,45)]
+    for input_data in test_set:
+        encoded = coder.encode(input_data)
+        output_data = coder.decode(encoded)
+        if input_data != output_data:
+            raise Exception("Coder error!")
+
+def testStepArrayStretch():
+    model = Model(None,None)
+    test_set = [  ([2,2,2],20),
+                  ([2,0,0,2,0,2,2],1),
+                  ([2,2,2,2,2],21),
+                  ([2,2,2,2,2,2],30),
+                  ([],120),
+                  ([2],220)]
+    for t in test_set: 
+        input_arr, length = t
+        if len(model.stretchTo(input_arr, length )) != length:
+            raise Exception("step interpolation error!")
+
+def test():
+    testCoder()
+    testStepArrayStretch()
+
 
 if __name__ == "__main__":
+    test()
     SimpleLaser("test_laser_job.eps")
+    Simulator()
 
 
 
