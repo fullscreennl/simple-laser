@@ -9,7 +9,24 @@ import traceback
 
 MACHINE_SIZE = (1250,900)
 STEPS_PER_MM = 100.0
-COLOR_TO_POWER_MAP = {"white":0,"lime":15,"red":3,"blue":15,"yellow":3,"#288cf0":10}
+COLOR_TO_POWER_MAP = {  'white':0,
+                        '#288cf0':0,
+                        'red':1,
+                        'yellow':2,
+                        'lime':3,
+                        'aqua':4,
+                        'blue':5,
+                        'fuchsia':6,
+                        '#996633':7,
+                        '#ff7f00':8,
+                        '#7f007f':9,
+                        '#ff0080':10,
+                        '#ff6666':11,
+                        '#cccccc':12,
+                        'olive':13,
+                        'gray':14,
+                        'maroon':15
+                        }
 SIMULATOR_PIXELS_PER_MM = 5
  
 class SimpleLaser:
