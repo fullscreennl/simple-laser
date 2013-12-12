@@ -107,6 +107,12 @@ void doLaserJob(void *arg)
     unsigned long record;
     unsigned long counter = 1;
 
+    bcm2835_gpio_write(LASER, LOW);
+    bcm2835_gpio_write(POWER_1, LOW);
+    bcm2835_gpio_write(POWER_2, LOW);
+    bcm2835_gpio_write(POWER_3, LOW);
+    bcm2835_gpio_write(POWER_4, LOW);
+
     for(i=0;i<num_records;i+=4){
         
         rt_task_wait_period(NULL);
@@ -237,7 +243,7 @@ int main(int argc, char* argv[])
     bcm2835_gpio_fsel(POWER_3, BCM2835_GPIO_FSEL_OUTP);
     bcm2835_gpio_fsel(POWER_4, BCM2835_GPIO_FSEL_OUTP);
     bcm2835_gpio_fsel(POWER_CTL_CLOCK, BCM2835_GPIO_FSEL_OUTP);
-    
+
     /*
      * Arguments: &task,
      *            name,
@@ -252,6 +258,12 @@ int main(int argc, char* argv[])
      *            function argument
      */
     rt_task_start(&laser_task, &doLaserJob, NULL);
+
+    bcm2835_gpio_write(LASER, LOW);
+    bcm2835_gpio_write(POWER_1, LOW);
+    bcm2835_gpio_write(POWER_2, LOW);
+    bcm2835_gpio_write(POWER_3, LOW);
+    bcm2835_gpio_write(POWER_4, LOW);
 
     pause();
 
