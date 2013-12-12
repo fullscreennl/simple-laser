@@ -181,13 +181,14 @@ class Coder:
         power_mask =    0b0000001111111000000000
         speed_mask =    0b0000000000000111111111
 
-        #print "power_mask ",power_mask
-        #print "speed_mask ",speed_mask
+        # print "// mask ",mask," ",bin(mask)
+        # print "// power_mask ",power_mask," ",bin(power_mask)
+        # print "// speed_mask ",speed_mask," ",bin(speed_mask)
 
         x = (data & mask) >> 20
         y = (data & mask >> 2) >> 18
         laser = (data & mask >> 4) >> 16
-        power = (data & power_mask) >> 9
+        power = (data & power_mask)
         speed = (data & speed_mask)
 
         return (x, y,laser,power,speed)
