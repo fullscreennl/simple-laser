@@ -9,7 +9,7 @@ import traceback
 
 MACHINE_SIZE = (1250,900)
 STEPS_PER_MM = 100.0
-COLOR_TO_POWER_MAP = {"white":0,"lime":30,"red":80,"blue":25,"yellow":50,"#288cf0":23}
+COLOR_TO_POWER_MAP = {"white":0,"lime":15,"red":3,"blue":15,"yellow":3,"#288cf0":10}
 SIMULATOR_PIXELS_PER_MM = 5
  
 class SimpleLaser:
@@ -167,28 +167,28 @@ class Coder:
     #[ 0 0 1 30 499]
     def encode(self,data):
         x, y,laser,power,speed = data
-        enc = 0 << 22
-        enc = enc | (x << 20)
-        enc = enc | (y << 18)
-        enc = enc | (laser << 16)
+        enc = 0 << 19
+        enc = enc | (x << 17)
+        enc = enc | (y << 15)
+        enc = enc | (laser << 13)
         enc = enc | (power << 9)
         enc = enc | (speed << 0)
         return enc
         
     def decode(self,data):
 
-        mask =          0b1100000000000000000000
-        power_mask =    0b0000001111111000000000
-        speed_mask =    0b0000000000000111111111
+        mask =          0b1100000000000000000
+        power_mask =    0b0000001111000000000
+        speed_mask =    0b0000000000111111111
 
         # print "// mask ",mask," ",bin(mask)
         # print "// power_mask ",power_mask," ",bin(power_mask)
         # print "// speed_mask ",speed_mask," ",bin(speed_mask)
 
-        x = (data & mask) >> 20
-        y = (data & mask >> 2) >> 18
-        laser = (data & mask >> 4) >> 16
-        power = (data & power_mask)
+        x = (data & mask) >> 17
+        y = (data & mask >> 2) >> 15
+        laser = (data & mask >> 4) >> 13
+        power = (data & power_mask) >> 9
         speed = (data & speed_mask)
 
         return (x, y,laser,power,speed)
@@ -255,12 +255,12 @@ class Simulator:
 #some TDD a day to keep the doctor away
 def testCoder():
     coder = Coder()
-    test_set = [(3,3,0,100,499),
-                  (1,3,0,23,200),
-                  (0,0,1,10,300),
+    test_set = [(3,3,0,15,499),
+                  (1,3,0,3,200),
+                  (0,0,1,8,300),
                   (2,3,0,0,10),
-                  (3,2,1,99,20),
-                  (1,3,1,34,45)]
+                  (3,2,1,10,20),
+                  (1,3,1,1,45)]
     for input_data in test_set:
         encoded = coder.encode(input_data)
         output_data = coder.decode(encoded)

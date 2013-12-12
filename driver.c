@@ -14,6 +14,14 @@ RT_TASK laser_task;
 #define LEFT_CLOCK RPI_V2_GPIO_P1_13
 #define LEFT_DIR RPI_V2_GPIO_P1_15
 
+#define POWER_CLOCK RPI_V2_GPIO_P1_18
+#define POWER_1 RPI_V2_GPIO_P1_21
+#define POWER_2 RPI_V2_GPIO_P1_22
+#define POWER_3 RPI_V2_GPIO_P1_23
+#define POWER_4 RPI_V2_GPIO_P1_24
+
+#define LASER RPI_V2_GPIO_P1_16
+
 char motiondata[21];
 
 //scp driver.c rpi@192.168.0.105:/home/rpi/simplelaser
@@ -77,12 +85,12 @@ void doLaserJob(void *arg)
     int power = 0;
     int speed = 0;
     
-    // mask         3145728     0b1100000000000000000000
-    // power_mask   65024       0b1111111000000000
-    // speed_mask   511         0b111111111
+    // mask  393216   0b1100000000000000000
+    // power_mask  7680   0b1111000000000
+    // speed_mask  511   0b111111111
 
-    int mask = 3145728;
-    int power_mask = 65024;
+    int mask = 393216;
+    int power_mask = 7680;
     int speed_mask = 511; 
     
     long i;
@@ -95,9 +103,9 @@ void doLaserJob(void *arg)
 
         record = data[i];
         
-        xstep = (record & mask) >> 20;
-        ystep = (record & mask >> 2) >> 18;
-        laser = (record & mask >> 4) >> 16;
+        xstep = (record & mask) >> 17;
+        ystep = (record & mask >> 2) >> 15;
+        laser = (record & mask >> 4) >> 13;
         power = (record & power_mask) >> 9;
         speed = (record & speed_mask);
 
