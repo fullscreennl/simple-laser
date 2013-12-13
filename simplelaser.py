@@ -10,23 +10,25 @@ import traceback
 MACHINE_SIZE = (1250,900)
 
 STEPS_PER_MM = (1.000 / 0.022500000000000 , 1.000 /  0.011250000000000)
-COLOR_TO_POWER_MAP = {  'white':0,
-                        '#288cf0':0,
-                        'red':1,
-                        'yellow':2,
-                        'lime':3,
-                        'aqua':4,
-                        'blue':5,
-                        'fuchsia':6,
-                        '#996633':7,
-                        '#ff7f00':8,
-                        '#7f007f':9,
-                        '#ff0080':10,
-                        '#ff6666':11,
-                        '#cccccc':12,
-                        'olive':13,
-                        'gray':14,
-                        'maroon':15
+COLOR_TO_POWER_MAP = {  
+                        
+                        'white':0,
+                        'silver':1,
+                        'gray':2,
+                        'black':3,
+                        '#288cf0':3, # viacad color if black background
+                        'red':4,
+                        'maroon':5,
+                        'yellow':6,
+                        'olive':7,
+                        'lime':8,
+                        'green':9,
+                        'aqua':10,
+                        'teal':11,
+                        'blue':12,
+                        'navy':13,
+                        'fuchsia':14,
+                        'purple':15
                         }
 SIMULATOR_PIXELS_PER_MM = 5
  

@@ -1,10 +1,10 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%HiResBoundingBox:  -76.116974 -28.455109 837.286682 600.451050
-%%BoundingBox:  -76 -28 837 600
+%%HiResBoundingBox:  -73.096329 -27.325890 804.059631 576.622620
+%%BoundingBox:  -73 -27 804 576
 %%Pages: 0
 %%Creator: ViaCAD 2D
 %%Title: untitled
-%%CreationDate: Fri Dec 13 09:33:56 2013
+%%CreationDate: Fri Dec 13 12:12:44 2013
 %%EndComments
 
 %%Begin Prolog
@@ -12,236 +12,109 @@
 
 %%Page: one 1
 
-/setuserscreendict 22 dict def
-setuserscreendict begin
- /tempctm matrix def
- /temprot matrix def
- /tempscale matrix def
-
- /concatprocs
-  { /proc2 exch cvlit def
-    /proc1 exch cvlit def
-    /newproc proc1 length proc2 length add
-     array def
-    newproc 0 proc1 putinterval
-    newproc proc1 length proc2 putinterval
-    newproc cvx
-  } def
-
- /resmatrix matrix def
- /findresolution
-  { 72 0 resmatrix defaultmatrix dtransform
-    /yres exch def /xres exch def
-    xres dup mul yres dup mul add sqrt
-  } def
-end
-
-/setuserscreen
- { setuserscreendict begin
-    /spotfunction exch def
-    /screenangle exch def
-    /cellsize exch def
-    /m tempctm currentmatrix def
-    /rm screenangle temprot rotate def
-    /sm cellsize dup tempscale scale def
-
-    sm rm m m concatmatrix m concatmatrix pop
-    1 0 m dtransform /y1 exch def /x1 exch def
-
-    /veclength x1 dup mul y1 dup mul add sqrt def
-    /frequency findresolution veclength div def
-    /newscreenangle y1 x1 atan def
-
-    m 2 get m 1 get mul m 0 get m 3 get mul sub 0 gt
-    { {neg} /spotfunction load concatprocs
-       /spotfunction exch def
-    } if
-
-    frequency newscreenangle /spotfunction load
-    setscreen
-   end
- } def
-
-/setpatterndict 18 dict def
-setpatterndict begin
- /bitison
-  { /ybit exch def /xbit exch def
-    /bytevalue bstring ybit bwidth mul xbit 8 idiv add get def
-    /mask 1 7 xbit 8 mod sub bitshift def bytevalue mask and 0 ne
-  } def
-end
-
-/bitpatternspotfunction
- { setpatterndict begin
-    /y exch def /x exch def
-    /xindex x 1 add 2 div bpside mul cvi def
-    /yindex y 1 add 2 div bpside mul cvi def
-
-    xindex yindex bitison
-     { /onbits onbits 1 add def 1 }
-     { /offbits offbits 1 add def 0 }
-     ifelse
-    end
- } def
-
-/setpattern
- { setpatterndict begin
-    /cellsz exch def
-    /bwidth exch def
-    /bpside exch def
-    /bstring exch def
-
-    /onbits 0 def /offbits 0 def
-    cellsz 0 /bitpatternspotfunction load setuserscreen
-    {} settransfer
-    offbits offbits onbits add div setgray
-  end
- } def
-
-/pat0  <0000000000000000> def
-/pat1  <ffffffffffffffff> def
-/pat2  <ddff77ffddff77ff> def
-/pat3  <dd77dd77dd77dd77> def
-/pat4  <aa55aa55aa55aa55> def
-/pat5  <55ff55ff55ff55ff> def
-/pat6  <aaaaaaaaaaaaaaaa> def
-/pat7  <eeddbb77eeddbb77> def
-/pat8  <8080808080808080> def
-/pat9  <b130031bd8c00c8d> def
-/pat10 <8010022001084004> def
-/pat11 <ff888888ff888888> def
-/pat12 <ff808080ff080808> def
-/pat13 <8000000000000000> def
-/pat14 <8040200002040800> def
-/pat15 <8244394482010101> def
-/pat16 <f87422478f172271> def
-/pat17 <55a0404055050404> def
-/pat18 <2050888888880502> def
-/pat19 <bf00bfbfb0b0b0b0> def
-/pat20 <0000000000000000> def
-/pat21 <8000080080000800> def
-/pat22 <8800220088002200> def
-/pat23 <8822882288228822> def
-/pat24 <aa00aa00aa00aa00> def
-/pat25 <ff00ff00ff00ff00> def
-/pat26 <1122448811224488> def
-/pat27 <ff000000ff000000> def
-/pat28 <0102040810204080> def
-/pat29 <aa00800088008000> def
-/pat30 <ff80808080808080> def
-/pat31 <081c22c180010204> def
-/pat32 <881422418800aa00> def
-/pat33 <40a00000040a0000> def
-/pat34 <038448300c020101> def
-/pat35 <8080413e080814e3> def
-/pat36 <102054aaff020408> def
-/pat37 <77898f8f7798f8f8> def
-/pat38 <0008142a552a1408> def
-/pat39 <0000000000000000> def
-
 4 setmiterlimit
 newpath
- 761.169739 546.493469 moveto
- 0.000000 546.493469 lineto
+ 730.963318 524.744873 moveto
+ 0.000000 524.744873 lineto
 0.25 setlinewidth
 0 setgray
 1.000 1.000 1.000 setrgbcolor
 stroke
 newpath
- 30.074577 116.100067 10.000000 0.000000 360.000000 arc
+ 28.881092 111.431267 10.000000 0.000000 360.000000 arc
 0.25 setlinewidth
 0 setgray
-0.157 0.549 0.941 setrgbcolor
+0.753 0.753 0.753 setrgbcolor
 stroke
 newpath
- 58.081703 116.100067 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 0.000 0.000 setrgbcolor
-stroke
-newpath
- 84.847504 116.100067 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 1.000 0.000 setrgbcolor
-stroke
-newpath
- 110.721107 116.100067 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.000 1.000 0.000 setrgbcolor
-stroke
-newpath
- 30.074577 88.070320 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.000 1.000 1.000 setrgbcolor
-stroke
-newpath
- 58.081703 88.070320 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.000 0.000 1.000 setrgbcolor
-stroke
-newpath
- 84.847504 88.070320 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 0.000 1.000 setrgbcolor
-stroke
-newpath
- 110.721107 88.070320 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.600 0.400 0.200 setrgbcolor
-stroke
-newpath
- 30.546543 60.709728 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 0.498 0.000 setrgbcolor
-stroke
-newpath
- 58.553669 60.709732 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.498 0.000 0.498 setrgbcolor
-stroke
-newpath
- 85.319466 60.709728 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 0.000 0.502 setrgbcolor
-stroke
-newpath
- 111.193069 60.709732 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-1.000 0.400 0.400 setrgbcolor
-stroke
-newpath
- 31.438736 32.382591 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.800 0.800 0.800 setrgbcolor
-stroke
-newpath
- 59.445862 32.382591 10.000000 0.000000 360.000000 arc
-0.25 setlinewidth
-0 setgray
-0.502 0.502 0.000 setrgbcolor
-stroke
-newpath
- 86.211662 32.382591 10.000000 0.000000 360.000000 arc
+ 55.776775 111.431267 10.000000 0.000000 360.000000 arc
 0.25 setlinewidth
 0 setgray
 0.502 0.502 0.502 setrgbcolor
 stroke
 newpath
- 112.085266 32.382591 10.000000 0.000000 360.000000 arc
+ 81.480400 111.431267 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.157 0.549 0.941 setrgbcolor
+stroke
+newpath
+ 106.327232 111.431267 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+1.000 0.000 0.000 setrgbcolor
+stroke
+newpath
+ 28.881092 84.513863 10.000000 0.000000 360.000000 arc
 0.25 setlinewidth
 0 setgray
 0.502 0.000 0.000 setrgbcolor
+stroke
+newpath
+ 55.776775 84.513863 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+1.000 1.000 0.000 setrgbcolor
+stroke
+newpath
+ 81.480400 84.513863 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.502 0.502 0.000 setrgbcolor
+stroke
+newpath
+ 106.327232 84.513863 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 1.000 0.000 setrgbcolor
+stroke
+newpath
+ 29.334328 58.239056 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 0.502 0.000 setrgbcolor
+stroke
+newpath
+ 56.230011 58.239056 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 1.000 1.000 setrgbcolor
+stroke
+newpath
+ 81.933632 58.239056 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 0.502 0.502 setrgbcolor
+stroke
+newpath
+ 106.780464 58.239056 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 0.000 1.000 setrgbcolor
+stroke
+newpath
+ 30.191114 31.036055 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.000 0.000 0.502 setrgbcolor
+stroke
+newpath
+ 57.086800 31.036057 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+1.000 0.000 1.000 setrgbcolor
+stroke
+newpath
+ 82.790421 31.036055 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.502 0.000 0.502 setrgbcolor
+stroke
+newpath
+ 107.637253 31.036057 10.000000 0.000000 360.000000 arc
+0.25 setlinewidth
+0 setgray
+0.753 0.753 0.753 setrgbcolor
 stroke
 showpage
 %%EOF
