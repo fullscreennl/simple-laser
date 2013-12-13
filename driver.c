@@ -259,13 +259,18 @@ int main(int argc, char* argv[])
      */
     rt_task_start(&laser_task, &doLaserJob, NULL);
 
+    pause();
+
     bcm2835_gpio_write(LASER, LOW);
     bcm2835_gpio_write(POWER_1, LOW);
     bcm2835_gpio_write(POWER_2, LOW);
     bcm2835_gpio_write(POWER_3, LOW);
     bcm2835_gpio_write(POWER_4, LOW);
 
-    pause();
+    //one clock tick to shut down the laser
+    bcm2835_gpio_write(POWER_CTL_CLOCK, HIGH);
+    rt_task_sleep(100);
+    bcm2835_gpio_write(POWER_CTL_CLOCK, LOW);
 
     rt_task_delete(&laser_task);
 
