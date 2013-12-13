@@ -31,7 +31,8 @@ COLOR_TO_POWER_MAP = {
                         'fuchsia':14,
                         'purple':15
                         }
-SIMULATOR_PIXELS_PER_MM = 3
+
+SIMULATOR_PIXELS_PER_MM = 12
  
 class SimpleLaser:
 
@@ -256,9 +257,9 @@ class Simulator:
                 x = int(round(x))
                 y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
                 if laser:
-                    self.draw.ellipse((x-1,y-1,x+3,y+3),fill=(0,0,0,255))
+                    self.draw.ellipse((x,y,x+1,y+1),fill=(0,0,0,255))
                 else:
-                    self.draw.ellipse((x-5,y-5,x+9,y+9),fill=(255,0,0,128))
+                    self.draw.ellipse((x-5,y-5,x+9,y+9),fill=(255,0,0,50))
 
                 byte = self.motiondata.read(4)
         except:
@@ -308,7 +309,7 @@ def test():
 
 if __name__ == "__main__":
     test()
-    SimpleLaser("test_laser_job.eps")
+    #SimpleLaser("test_laser_job.eps")
     Simulator()
 
 
