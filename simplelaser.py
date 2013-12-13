@@ -8,7 +8,8 @@ import struct
 import traceback
 
 MACHINE_SIZE = (1250,900)
-STEPS_PER_MM = 100.0
+
+STEPS_PER_MM = (1.000 / 0.022500000000000 , 1.000 /  0.011250000000000)
 COLOR_TO_POWER_MAP = {  'white':0,
                         '#288cf0':0,
                         'red':1,
@@ -158,7 +159,7 @@ class Model:
 
     def translate(self,coord):
         coord = coord.split(",")
-        x,y = (float(coord[0]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM , (float(coord[1]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM
+        x,y = (float(coord[0]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM[0] , (float(coord[1]) / self.svg_units_to_mm_ratio) * STEPS_PER_MM[1]
         return int(round(x)),int(round(y))
 
     #http://stackoverflow.com/questions/12991962/stretching-a-list-in-python
@@ -247,8 +248,8 @@ class Simulator:
                 x,y,laser,power,speed = coder.decode(sample[0])
                 x_steps += self.valueForStep(x)
                 y_steps += self.valueForStep(y) 
-                x = (x_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
-                y = (y_steps / STEPS_PER_MM) * SIMULATOR_PIXELS_PER_MM
+                x = (x_steps / STEPS_PER_MM[0]) * SIMULATOR_PIXELS_PER_MM
+                y = (y_steps / STEPS_PER_MM[1]) * SIMULATOR_PIXELS_PER_MM
                 x = int(round(x))
                 y = -int(round(y)) + 900*SIMULATOR_PIXELS_PER_MM
                 if laser:
