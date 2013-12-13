@@ -39,6 +39,7 @@ void doLaserJob(void *arg)
     
     
     int power_ctl[2] = {LOW,HIGH};
+    int laser_ctl[2] = {HIGH,LOW};
 
     int delaytimes[500] = {
     //linear mode
@@ -107,7 +108,7 @@ void doLaserJob(void *arg)
     unsigned long record;
     unsigned long counter = 1;
 
-    bcm2835_gpio_write(LASER, LOW);
+    bcm2835_gpio_write(LASER, HIGH);
     bcm2835_gpio_write(POWER_1, LOW);
     bcm2835_gpio_write(POWER_2, LOW);
     bcm2835_gpio_write(POWER_3, LOW);
@@ -131,14 +132,14 @@ void doLaserJob(void *arg)
         pw3 = (power & power_gpio_mask >> 2) >> 1;
         pw4 = (power & power_gpio_mask >> 3);
 
-        printf( "record: %i %i %i %i %i \n",xstep,ystep,laser,power,speed);
+        //printf( "record: %i %i %i %i %i \n",xstep,ystep,laser,power,speed);
 
         //xy motion
         if(xstep != xdir){
             if(xstep < 1){
-                bcm2835_gpio_write(X_DIR, HIGH);
-            }else if(xstep > 1){
                 bcm2835_gpio_write(X_DIR, LOW);
+            }else if(xstep > 1){
+                bcm2835_gpio_write(X_DIR, HIGH);
             }
             
             xdir = xstep;
@@ -147,9 +148,9 @@ void doLaserJob(void *arg)
         
         if(ystep != ydir){
             if(ystep < 1){
-                bcm2835_gpio_write(Y_DIR, HIGH);
-            }else if(ystep > 1){
                 bcm2835_gpio_write(Y_DIR, LOW);
+            }else if(ystep > 1){
+                bcm2835_gpio_write(Y_DIR, HIGH);
             }
             
             ydir = ystep;
@@ -167,7 +168,7 @@ void doLaserJob(void *arg)
 
         //laser on/off
         if(laser != currentlaserstate){
-            bcm2835_gpio_write(LASER, power_ctl[laser]);
+            bcm2835_gpio_write(LASER, laser_ctl[laser]);
             currentlaserstate = laser;
         }
         
@@ -183,7 +184,7 @@ void doLaserJob(void *arg)
 
         bcm2835_gpio_write(POWER_CTL_CLOCK, HIGH);
         
-        rt_task_sleep(100);
+        rt_task_sleep(500);
         //rt_task_set_periodic(NULL, TM_NOW, currentdelay);
         
         if (xstep != 1) {
@@ -261,7 +262,7 @@ int main(int argc, char* argv[])
 
     pause();
 
-    bcm2835_gpio_write(LASER, LOW);
+    bcm2835_gpio_write(LASER, HIGH);
     bcm2835_gpio_write(POWER_1, LOW);
     bcm2835_gpio_write(POWER_2, LOW);
     bcm2835_gpio_write(POWER_3, LOW);

@@ -9,7 +9,8 @@ import traceback
 
 MACHINE_SIZE = (1250,900)
 
-STEPS_PER_MM = (1.000 / 0.022500000000000 , 1.000 /  0.011250000000000)
+STEPS_PER_MM = (3.500 / 0.022500000000000 , 3.500 /  0.011250000000000)
+
 COLOR_TO_POWER_MAP = {  
                         
                         'white':0,
@@ -30,7 +31,7 @@ COLOR_TO_POWER_MAP = {
                         'fuchsia':14,
                         'purple':15
                         }
-SIMULATOR_PIXELS_PER_MM = 5
+SIMULATOR_PIXELS_PER_MM = 3
  
 class SimpleLaser:
 
@@ -121,7 +122,7 @@ class Model:
             state = p[2]
             power = p[3]
             if abs(delta_x) + abs(delta_y) > 0:
-                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power,20)
+                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power,0)
                 self.steps = np.concatenate((self.steps,numpy_arr))
             prev = p
 
