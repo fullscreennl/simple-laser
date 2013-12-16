@@ -6,6 +6,8 @@ from xml.dom import minidom
 import numpy as np
 import struct
 import traceback
+from time import gmtime, strftime
+
 
 MACHINE_SIZE = (1250,900)
 
@@ -33,11 +35,17 @@ COLOR_TO_POWER_MAP = {
                         }
 
 SIMULATOR_PIXELS_PER_MM = 5
+
+class TimedLog:
+
+    def __init__(self,msg):
+        print msg," : ",strftime("%Y-%m-%d %H:%M:%S", gmtime())
  
 class SimpleLaser:
 
     def __init__(self,eps_filename=None):
         self.svg_units_to_mm_ratio = 1
+        TimedLog("Opening eps input file ...")
         paths = self.openJob(eps_filename)
         self.model = Model(paths,self.svg_units_to_mm_ratio)
         self.generator = Generator(self.model.getData())
@@ -90,7 +98,9 @@ class Model:
             self.current_state = (0,0,0,100) # x,y,on/off,power
             self.paths = paths
             self.svg_units_to_mm_ratio = svg_units_to_mm_ratio
+            TimedLog("Building cutting paths ...")
             self.buildPaths()
+            TimedLog("Expanding cutting paths to steps ...")
             self.expandPaths()
 
     def getData(self):
@@ -217,6 +227,7 @@ class Coder:
 
 class Generator:
     def __init__(self,data):
+        TimedLog("Encoding file ...")
         self.coder = Coder()
         binfile = open("laserjob.bin","wb")
         for d in data:
@@ -231,6 +242,7 @@ class Easer:
 class Simulator:
 
     def __init__(self,laser_job_filename = "laserjob.bin"):
+        TimedLog("Simulating machine path ...")
         w,h = MACHINE_SIZE
         self.canvas = Image.new('RGBA',(int(w*SIMULATOR_PIXELS_PER_MM),int(h*SIMULATOR_PIXELS_PER_MM)),(255,255,255,255))
         self.draw = ImageDraw.Draw(self.canvas)
@@ -311,6 +323,7 @@ if __name__ == "__main__":
     test()
     SimpleLaser("test_laser_job.eps")
     Simulator()
+    TimedLog("done ...")
 
 
 
