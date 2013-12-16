@@ -114,7 +114,10 @@ void doLaserJob(void *arg)
     bcm2835_gpio_write(POWER_3, LOW);
     bcm2835_gpio_write(POWER_4, LOW);
 
-    for(i=0;i<num_records;i+=4){
+    bcm2835_gpio_write(X_CLOCK, HIGH);
+    bcm2835_gpio_write(Y_CLOCK, HIGH);
+
+    for(i=0;i<num_records;i++){
         
         rt_task_wait_period(NULL);
 
@@ -132,8 +135,6 @@ void doLaserJob(void *arg)
         pw3 = (power & power_gpio_mask >> 2) >> 1;
         pw4 = (power & power_gpio_mask >> 3);
 
-        //printf( "record: %i %i %i %i %i \n",xstep,ystep,laser,power,speed);
-
         //xy motion
         if(xstep != xdir){
             if(xstep < 1){
@@ -141,9 +142,7 @@ void doLaserJob(void *arg)
             }else if(xstep > 1){
                 bcm2835_gpio_write(X_DIR, HIGH);
             }
-            
             xdir = xstep;
-            
         }
         
         if(ystep != ydir){
@@ -152,9 +151,7 @@ void doLaserJob(void *arg)
             }else if(ystep > 1){
                 bcm2835_gpio_write(Y_DIR, HIGH);
             }
-            
             ydir = ystep;
-            
         }
 
         //laser power
@@ -178,6 +175,7 @@ void doLaserJob(void *arg)
         if (xstep != 1) {
             bcm2835_gpio_write(X_CLOCK, HIGH);
         }
+
         if (ystep != 1) {
             bcm2835_gpio_write(Y_CLOCK, HIGH);
         }
@@ -185,7 +183,6 @@ void doLaserJob(void *arg)
         bcm2835_gpio_write(POWER_CTL_CLOCK, HIGH);
         
         rt_task_sleep(500);
-        //rt_task_set_periodic(NULL, TM_NOW, currentdelay);
         
         if (xstep != 1) {
             bcm2835_gpio_write(X_CLOCK, LOW);
