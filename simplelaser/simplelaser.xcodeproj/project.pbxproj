@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FAB8BB69186057D700C555C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB68186057D700C555C3 /* Foundation.framework */; };
+		FAB8BB6B186057D700C555C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB6A186057D700C555C3 /* CoreGraphics.framework */; };
+		FAB8BB6D186057D700C555C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB6C186057D700C555C3 /* UIKit.framework */; };
+		FAB8BB73186057D700C555C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAB8BB71186057D700C555C3 /* InfoPlist.strings */; };
+		FAB8BB75186057D700C555C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB8BB74186057D700C555C3 /* main.m */; };
+		FAB8BB79186057D700C555C3 /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB8BB78186057D700C555C3 /* SLAppDelegate.m */; };
+		FAB8BB7C186057D700C555C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB8BB7A186057D700C555C3 /* Main.storyboard */; };
+		FAB8BB7F186057D700C555C3 /* SLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB8BB7E186057D700C555C3 /* SLViewController.m */; };
+		FAB8BB81186057D700C555C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB8BB80186057D700C555C3 /* Images.xcassets */; };
+		FAB8BB88186057D700C555C3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB87186057D700C555C3 /* XCTest.framework */; };
+		FAB8BB89186057D700C555C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB68186057D700C555C3 /* Foundation.framework */; };
+		FAB8BB8A186057D700C555C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB6C186057D700C555C3 /* UIKit.framework */; };
+		FAB8BB92186057D700C555C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAB8BB90186057D700C555C3 /* InfoPlist.strings */; };
+		FAB8BB94186057D700C555C3 /* simplelaserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB8BB93186057D700C555C3 /* simplelaserTests.m */; };
+		FAB8BB9F18605DC500C555C3 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB8BB9E18605DC500C555C3 /* GCDAsyncSocket.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAB8BB8B186057D700C555C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAB8BB5D186057D700C555C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAB8BB64186057D700C555C3;
+			remoteInfo = simplelaser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FAB8BB65186057D700C555C3 /* simplelaser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simplelaser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB8BB68186057D700C555C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FAB8BB6A186057D700C555C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FAB8BB6C186057D700C555C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAB8BB70186057D700C555C3 /* simplelaser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "simplelaser-Info.plist"; sourceTree = "<group>"; };
+		FAB8BB72186057D700C555C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FAB8BB74186057D700C555C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FAB8BB76186057D700C555C3 /* simplelaser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "simplelaser-Prefix.pch"; sourceTree = "<group>"; };
+		FAB8BB77186057D700C555C3 /* SLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
+		FAB8BB78186057D700C555C3 /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
+		FAB8BB7B186057D700C555C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FAB8BB7D186057D700C555C3 /* SLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLViewController.h; sourceTree = "<group>"; };
+		FAB8BB7E186057D700C555C3 /* SLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLViewController.m; sourceTree = "<group>"; };
+		FAB8BB80186057D700C555C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FAB8BB86186057D700C555C3 /* simplelaserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simplelaserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB8BB87186057D700C555C3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FAB8BB8F186057D700C555C3 /* simplelaserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "simplelaserTests-Info.plist"; sourceTree = "<group>"; };
+		FAB8BB91186057D700C555C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FAB8BB93186057D700C555C3 /* simplelaserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simplelaserTests.m; sourceTree = "<group>"; };
+		FAB8BB9D18605DC500C555C3 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		FAB8BB9E18605DC500C555C3 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAB8BB62186057D700C555C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB6B186057D700C555C3 /* CoreGraphics.framework in Frameworks */,
+				FAB8BB6D186057D700C555C3 /* UIKit.framework in Frameworks */,
+				FAB8BB69186057D700C555C3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB8BB83186057D700C555C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB88186057D700C555C3 /* XCTest.framework in Frameworks */,
+				FAB8BB8A186057D700C555C3 /* UIKit.framework in Frameworks */,
+				FAB8BB89186057D700C555C3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FAB8BB5C186057D700C555C3 = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB6E186057D700C555C3 /* simplelaser */,
+				FAB8BB8D186057D700C555C3 /* simplelaserTests */,
+				FAB8BB67186057D700C555C3 /* Frameworks */,
+				FAB8BB66186057D700C555C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FAB8BB66186057D700C555C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB65186057D700C555C3 /* simplelaser.app */,
+				FAB8BB86186057D700C555C3 /* simplelaserTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAB8BB67186057D700C555C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB68186057D700C555C3 /* Foundation.framework */,
+				FAB8BB6A186057D700C555C3 /* CoreGraphics.framework */,
+				FAB8BB6C186057D700C555C3 /* UIKit.framework */,
+				FAB8BB87186057D700C555C3 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAB8BB6E186057D700C555C3 /* simplelaser */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB77186057D700C555C3 /* SLAppDelegate.h */,
+				FAB8BB78186057D700C555C3 /* SLAppDelegate.m */,
+				FAB8BB9D18605DC500C555C3 /* GCDAsyncSocket.h */,
+				FAB8BB9E18605DC500C555C3 /* GCDAsyncSocket.m */,
+				FAB8BB7A186057D700C555C3 /* Main.storyboard */,
+				FAB8BB7D186057D700C555C3 /* SLViewController.h */,
+				FAB8BB7E186057D700C555C3 /* SLViewController.m */,
+				FAB8BB80186057D700C555C3 /* Images.xcassets */,
+				FAB8BB6F186057D700C555C3 /* Supporting Files */,
+			);
+			path = simplelaser;
+			sourceTree = "<group>";
+		};
+		FAB8BB6F186057D700C555C3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB70186057D700C555C3 /* simplelaser-Info.plist */,
+				FAB8BB71186057D700C555C3 /* InfoPlist.strings */,
+				FAB8BB74186057D700C555C3 /* main.m */,
+				FAB8BB76186057D700C555C3 /* simplelaser-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAB8BB8D186057D700C555C3 /* simplelaserTests */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB93186057D700C555C3 /* simplelaserTests.m */,
+				FAB8BB8E186057D700C555C3 /* Supporting Files */,
+			);
+			path = simplelaserTests;
+			sourceTree = "<group>";
+		};
+		FAB8BB8E186057D700C555C3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8BB8F186057D700C555C3 /* simplelaserTests-Info.plist */,
+				FAB8BB90186057D700C555C3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAB8BB64186057D700C555C3 /* simplelaser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB8BB97186057D700C555C3 /* Build configuration list for PBXNativeTarget "simplelaser" */;
+			buildPhases = (
+				FAB8BB61186057D700C555C3 /* Sources */,
+				FAB8BB62186057D700C555C3 /* Frameworks */,
+				FAB8BB63186057D700C555C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = simplelaser;
+			productName = simplelaser;
+			productReference = FAB8BB65186057D700C555C3 /* simplelaser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAB8BB85186057D700C555C3 /* simplelaserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB8BB9A186057D700C555C3 /* Build configuration list for PBXNativeTarget "simplelaserTests" */;
+			buildPhases = (
+				FAB8BB82186057D700C555C3 /* Sources */,
+				FAB8BB83186057D700C555C3 /* Frameworks */,
+				FAB8BB84186057D700C555C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAB8BB8C186057D700C555C3 /* PBXTargetDependency */,
+			);
+			name = simplelaserTests;
+			productName = simplelaserTests;
+			productReference = FAB8BB86186057D700C555C3 /* simplelaserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAB8BB5D186057D700C555C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SL;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "johan ten broeke";
+				TargetAttributes = {
+					FAB8BB85186057D700C555C3 = {
+						TestTargetID = FAB8BB64186057D700C555C3;
+					};
+				};
+			};
+			buildConfigurationList = FAB8BB60186057D700C555C3 /* Build configuration list for PBXProject "simplelaser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FAB8BB5C186057D700C555C3;
+			productRefGroup = FAB8BB66186057D700C555C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAB8BB64186057D700C555C3 /* simplelaser */,
+				FAB8BB85186057D700C555C3 /* simplelaserTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FAB8BB63186057D700C555C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB81186057D700C555C3 /* Images.xcassets in Resources */,
+				FAB8BB73186057D700C555C3 /* InfoPlist.strings in Resources */,
+				FAB8BB7C186057D700C555C3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB8BB84186057D700C555C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB92186057D700C555C3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAB8BB61186057D700C555C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB9F18605DC500C555C3 /* GCDAsyncSocket.m in Sources */,
+				FAB8BB75186057D700C555C3 /* main.m in Sources */,
+				FAB8BB7F186057D700C555C3 /* SLViewController.m in Sources */,
+				FAB8BB79186057D700C555C3 /* SLAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB8BB82186057D700C555C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB8BB94186057D700C555C3 /* simplelaserTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAB8BB8C186057D700C555C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAB8BB64186057D700C555C3 /* simplelaser */;
+			targetProxy = FAB8BB8B186057D700C555C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FAB8BB71186057D700C555C3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAB8BB72186057D700C555C3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FAB8BB7A186057D700C555C3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAB8BB7B186057D700C555C3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FAB8BB90186057D700C555C3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAB8BB91186057D700C555C3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FAB8BB95186057D700C555C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FAB8BB96186057D700C555C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FAB8BB98186057D700C555C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "simplelaser/simplelaser-Prefix.pch";
+				INFOPLIST_FILE = "simplelaser/simplelaser-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FAB8BB99186057D700C555C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "simplelaser/simplelaser-Prefix.pch";
+				INFOPLIST_FILE = "simplelaser/simplelaser-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FAB8BB9B186057D700C555C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/simplelaser.app/simplelaser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "simplelaser/simplelaser-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "simplelaserTests/simplelaserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FAB8BB9C186057D700C555C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/simplelaser.app/simplelaser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "simplelaser/simplelaser-Prefix.pch";
+				INFOPLIST_FILE = "simplelaserTests/simplelaserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAB8BB60186057D700C555C3 /* Build configuration list for PBXProject "simplelaser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB8BB95186057D700C555C3 /* Debug */,
+				FAB8BB96186057D700C555C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAB8BB97186057D700C555C3 /* Build configuration list for PBXNativeTarget "simplelaser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB8BB98186057D700C555C3 /* Debug */,
+				FAB8BB99186057D700C555C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FAB8BB9A186057D700C555C3 /* Build configuration list for PBXNativeTarget "simplelaserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB8BB9B186057D700C555C3 /* Debug */,
+				FAB8BB9C186057D700C555C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAB8BB5D186057D700C555C3 /* Project object */;
+}
