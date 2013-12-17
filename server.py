@@ -12,6 +12,8 @@ import time
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
+Z_DIR = 7
+Z_CLOCK = 8
 Y_CLOCK = 11
 Y_DIR = 12
 X_CLOCK = 13
@@ -23,6 +25,8 @@ POWER_3 = 23
 POWER_4 = 24
 LASER = 16
 
+GPIO.setup(Z_DIR, GPIO.OUT)
+GPIO.setup(Z_CLOCK, GPIO.OUT)
 GPIO.setup(Y_CLOCK, GPIO.OUT)
 GPIO.setup(Y_DIR, GPIO.OUT)
 GPIO.setup(X_CLOCK, GPIO.OUT)
@@ -46,11 +50,10 @@ class Channel(asynchat.async_chat):
         self.request = None
         self.data = ""
         self.server = server
-        self.error = 0
 
         self.command_stopped = True
 
-        self.dispatchTable = {
+        self.dispatch_table = {
 
             'zup':(self.jogZ,1),
             'zdown':(self.jogZ,-1),
@@ -66,16 +69,12 @@ class Channel(asynchat.async_chat):
         
     def handle_close(self):
         print "client left ..."
+        self.command_stopped = True
         self.close()
    
     def handle_error(self):
-        self.error = 1
+        self.command_stopped = True
         asynchat.async_chat.handle_error(self)
-
-    def push(self, data):
-        if self.error:
-            return
-        asynchat.async_chat.push(self, data)
 
     def collect_incoming_data(self, data):
         self.data = self.data + data
@@ -89,8 +88,8 @@ class Channel(asynchat.async_chat):
         try:
             obj = json.loads(str(data))
             action = obj['action']
-            func = self.dispatchTable[action][0]
-            arg = self.dispatchTable[action][1]
+            func = self.dispatch_table[action][0]
+            arg = self.dispatch_table[action][1]
             func(arg)
         except:
             print "RMI ERROR"
@@ -107,9 +106,9 @@ class Channel(asynchat.async_chat):
             if self.command_stopped:
                 return
             GPIO.output(clock_gpio, GPIO.HIGH)
-            time.sleep(0.0002)
+            time.sleep(0.0001)
             GPIO.output(clock_gpio, GPIO.LOW)
-            time.sleep(0.0002)
+            time.sleep(0.0001)
             asyncore.poll()
 
     def jogX(self,direction):
@@ -119,13 +118,46 @@ class Channel(asynchat.async_chat):
         self.jogWithDirectionAndClock(Y_DIR,Y_CLOCK,direction)
 
     def jogZ(self,direction):
-        #self.jogWithDirectionAndClock(Z_DIR,Z_CLOCK,direction)
-        pass
+        self.jogWithDirectionAndClock(Z_DIR,Z_CLOCK,direction)
 
     def stopJogging(self,direction):
         self.command_stopped = True
 
     def laserTest(self,arg):
+        
+        self.command_stopped = False
+
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.HIGH)
+
+        GPIO.output(POWER_CTL_CLOCK, GPIO.HIGH)
+        time.sleep(0.0001)
+        GPIO.output(POWER_CTL_CLOCK, GPIO.LOW)
+        time.sleep(0.0001)
+
+        GPIO.output(LASER, GPIO.LOW)
+
+        self.data = ""
+        while 1:
+            if self.command_stopped:
+                break
+            print "LASER POWER!"
+            asyncore.poll()
+
+        GPIO.output(LASER, GPIO.HIGH)
+
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_1, GPIO.LOW)
+
+        GPIO.output(POWER_CTL_CLOCK, GPIO.HIGH)
+        time.sleep(0.0001)
+        GPIO.output(POWER_CTL_CLOCK, GPIO.LOW)
+        time.sleep(0.0001)
+
         print "laser test"
 
     def doLaserJob(self,arg):

@@ -96,7 +96,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="laser:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AG8-m9-kmV"/>
+                                    <action selector="laser:" destination="vXZ-lx-hvc" eventType="touchDown" id="kD5-PE-hrD"/>
+                                    <action selector="stopAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9hs-4V-qBF"/>
+                                    <action selector="stopAction:" destination="vXZ-lx-hvc" eventType="touchUpOutside" id="n4c-2t-dB6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fy-P4-9xf">
