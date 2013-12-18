@@ -198,6 +198,17 @@ void doLaserJob(void *arg)
         counter ++;
         
     }
+
+    bcm2835_gpio_write(LASER, HIGH);
+    bcm2835_gpio_write(POWER_1, LOW);
+    bcm2835_gpio_write(POWER_2, LOW);
+    bcm2835_gpio_write(POWER_3, LOW);
+    bcm2835_gpio_write(POWER_4, LOW);
+
+    //one clock tick to shut down the laser
+    bcm2835_gpio_write(POWER_CTL_CLOCK, HIGH);
+    rt_task_sleep(100);
+    bcm2835_gpio_write(POWER_CTL_CLOCK, LOW);
     
     free(data);
 
@@ -259,18 +270,9 @@ int main(int argc, char* argv[])
 
     pause();
 
-    bcm2835_gpio_write(LASER, HIGH);
-    bcm2835_gpio_write(POWER_1, LOW);
-    bcm2835_gpio_write(POWER_2, LOW);
-    bcm2835_gpio_write(POWER_3, LOW);
-    bcm2835_gpio_write(POWER_4, LOW);
-
-    //one clock tick to shut down the laser
-    bcm2835_gpio_write(POWER_CTL_CLOCK, HIGH);
-    rt_task_sleep(100);
-    bcm2835_gpio_write(POWER_CTL_CLOCK, LOW);
-
     rt_task_delete(&laser_task);
+
+    popen("/etc/init.d/startlaserservice.sh start","r");
 
     return 0;
     

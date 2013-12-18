@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import asyncore, asynchat
 import os, socket, string
 import traceback
@@ -50,11 +52,8 @@ class Channel(asynchat.async_chat):
         self.request = None
         self.data = ""
         self.server = server
-
         self.command_stopped = True
-
         self.dispatch_table = {
-
             'zup':(self.jogZ,1),
             'zdown':(self.jogZ,-1),
             'xup':(self.jogX,1),
@@ -64,7 +63,6 @@ class Channel(asynchat.async_chat):
             'laser':(self.laserTest,1),
             'startjob':(self.doLaserJob,None),
             'stop':(self.stopJogging,None)
-
         }
         
     def handle_close(self):
@@ -84,7 +82,6 @@ class Channel(asynchat.async_chat):
         self.data = ""
         
     def parseRequest(self,data):
-        print self.data
         try:
             obj = json.loads(str(data))
             action = obj['action']
@@ -124,45 +121,35 @@ class Channel(asynchat.async_chat):
         self.command_stopped = True
 
     def laserTest(self,arg):
-        
         self.command_stopped = False
-
-        GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.HIGH)
-
-        GPIO.output(POWER_CTL_CLOCK, GPIO.HIGH)
-        time.sleep(0.0001)
-        GPIO.output(POWER_CTL_CLOCK, GPIO.LOW)
-        time.sleep(0.0001)
-
-        GPIO.output(LASER, GPIO.LOW)
-
+        self.laserOn(True)
         self.data = ""
         while 1:
             if self.command_stopped:
                 break
-            print "LASER POWER!"
             asyncore.poll()
+        self.laserOn(False)
 
-        GPIO.output(LASER, GPIO.HIGH)
-
+    def laserOn(self,on=False):
         GPIO.output(POWER_1, GPIO.LOW)
         GPIO.output(POWER_1, GPIO.LOW)
         GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.LOW)
-
+        if on:
+            GPIO.output(POWER_1, GPIO.HIGH)
+        else:
+            GPIO.output(POWER_1, GPIO.LOW)
         GPIO.output(POWER_CTL_CLOCK, GPIO.HIGH)
         time.sleep(0.0001)
         GPIO.output(POWER_CTL_CLOCK, GPIO.LOW)
         time.sleep(0.0001)
-
-        print "laser test"
+        if on:
+            GPIO.output(LASER, GPIO.LOW)
+        else:
+            GPIO.output(LASER, GPIO.HIGH)
 
     def doLaserJob(self,arg):
         print "starting job "
-        Popen(["./driver", "laserjob.bin"],close_fds=True)
+        Popen(["/home/rpi/simplelaser/driver", "/home/rpi/simplelaser/laserjob.bin"],close_fds=True)
         self.close()
         os._exit(0)
             
