@@ -9,6 +9,9 @@
 #import "SLViewController.h"
 #import "GCDAsyncSocket.h"
 
+#define SERVER_IP @"192.168.1.21"
+#define SERVER_IP @"127.0.0.1"
+
 @interface SLViewController ()
 
 @end
@@ -23,7 +26,7 @@
 -(void)connect{
     
     NSError *error = nil;
-    if (![asyncSocket connectToHost:@"192.168.1.21" onPort:20001 withTimeout:3.0 error:&error])
+    if (![asyncSocket connectToHost:SERVER_IP onPort:20001 withTimeout:3.0 error:&error])
     {
         NSLog(@"ERROR %@",error);
         [asyncSocket disconnect];

@@ -88,6 +88,9 @@ class Channel(asynchat.async_chat):
             func = self.dispatch_table[action][0]
             arg = self.dispatch_table[action][1]
             func(arg)
+        except OSError:
+            if func.__name__ == "doLaserJob":
+                print "LASERCUTTER DRIVER NOT FOUND"
         except:
             print "RMI ERROR"
             traceback.print_exc(file=self)
@@ -148,7 +151,6 @@ class Channel(asynchat.async_chat):
             GPIO.output(LASER, GPIO.HIGH)
 
     def doLaserJob(self,arg):
-        print "starting job "
         Popen(["/home/rpi/simplelaser/driver", "/home/rpi/simplelaser/laserjob.bin"],close_fds=True)
         self.close()
         os._exit(0)
