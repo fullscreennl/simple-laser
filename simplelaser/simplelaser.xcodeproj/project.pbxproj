@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA24205B1864524700FBD47D /* button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205A1864524700FBD47D /* button_bg.png */; };
+		FA24205E1864581800FBD47D /* button_bg_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205C1864581800FBD47D /* button_bg_blue.png */; };
+		FA24205F1864581800FBD47D /* button_bg_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205D1864581800FBD47D /* button_bg_green.png */; };
+		FA242061186458E100FBD47D /* button_bg_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = FA242060186458E100FBD47D /* button_bg_yellow.png */; };
+		FA242063186459A900FBD47D /* button_bg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FA242062186459A900FBD47D /* button_bg_grey.png */; };
 		FAB8BB69186057D700C555C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB68186057D700C555C3 /* Foundation.framework */; };
 		FAB8BB6B186057D700C555C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB6A186057D700C555C3 /* CoreGraphics.framework */; };
 		FAB8BB6D186057D700C555C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB8BB6C186057D700C555C3 /* UIKit.framework */; };
@@ -35,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA24205A1864524700FBD47D /* button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg.png; sourceTree = "<group>"; };
+		FA24205C1864581800FBD47D /* button_bg_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_blue.png; sourceTree = "<group>"; };
+		FA24205D1864581800FBD47D /* button_bg_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_green.png; sourceTree = "<group>"; };
+		FA242060186458E100FBD47D /* button_bg_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_yellow.png; sourceTree = "<group>"; };
+		FA242062186459A900FBD47D /* button_bg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_grey.png; sourceTree = "<group>"; };
 		FAB8BB65186057D700C555C3 /* simplelaser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simplelaser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB8BB68186057D700C555C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAB8BB6A186057D700C555C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,8 +128,13 @@
 				FAB8BB77186057D700C555C3 /* SLAppDelegate.h */,
 				FAB8BB78186057D700C555C3 /* SLAppDelegate.m */,
 				FAB8BB9D18605DC500C555C3 /* GCDAsyncSocket.h */,
+				FA24205A1864524700FBD47D /* button_bg.png */,
+				FA24205C1864581800FBD47D /* button_bg_blue.png */,
+				FA242060186458E100FBD47D /* button_bg_yellow.png */,
+				FA24205D1864581800FBD47D /* button_bg_green.png */,
 				FAB8BB9E18605DC500C555C3 /* GCDAsyncSocket.m */,
 				FAB8BB7A186057D700C555C3 /* Main.storyboard */,
+				FA242062186459A900FBD47D /* button_bg_grey.png */,
 				FAB8BB7D186057D700C555C3 /* SLViewController.h */,
 				FAB8BB7E186057D700C555C3 /* SLViewController.m */,
 				FAB8BB80186057D700C555C3 /* Images.xcassets */,
@@ -234,9 +249,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA24205B1864524700FBD47D /* button_bg.png in Resources */,
 				FAB8BB81186057D700C555C3 /* Images.xcassets in Resources */,
+				FA24205E1864581800FBD47D /* button_bg_blue.png in Resources */,
 				FAB8BB73186057D700C555C3 /* InfoPlist.strings in Resources */,
+				FA24205F1864581800FBD47D /* button_bg_green.png in Resources */,
+				FA242061186458E100FBD47D /* button_bg_yellow.png in Resources */,
 				FAB8BB7C186057D700C555C3 /* Main.storyboard in Resources */,
+				FA242063186459A900FBD47D /* button_bg_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +489,7 @@
 				FAB8BB99186057D700C555C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAB8BB9A186057D700C555C3 /* Build configuration list for PBXNativeTarget "simplelaserTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +498,7 @@
 				FAB8BB9C186057D700C555C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -62,6 +62,8 @@
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
 	asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
     [self connect];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,7 +113,12 @@
 }
 
 -(void)applyConnectButtonState{
-    [connectButton setHidden:asyncSocket.isConnected];
+    [connectButton setEnabled:!asyncSocket.isConnected];
+    if(connectButton.isEnabled){
+        connectButton.titleLabel.text = @"CONNECT";
+    }else{
+        connectButton.titleLabel.text = @"";
+    }
 }
 
 -(void)command:(NSString*)cmd{

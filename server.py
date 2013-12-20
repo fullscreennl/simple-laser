@@ -91,6 +91,7 @@ class Channel(asynchat.async_chat):
         except OSError:
             if func.__name__ == "doLaserJob":
                 print "LASERCUTTER DRIVER NOT FOUND"
+                self.close()
         except:
             print "RMI ERROR"
             traceback.print_exc(file=self)
@@ -158,7 +159,7 @@ class Channel(asynchat.async_chat):
     def write(self,msg):
         print msg
 
-            
+
 class Server(asyncore.dispatcher):
 
     def __init__(self, port):
