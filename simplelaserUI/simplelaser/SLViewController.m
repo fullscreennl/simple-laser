@@ -12,7 +12,7 @@
 #if TARGET_IPHONE_SIMULATOR
     #define SERVER_IP @"127.0.0.1"
 #else
-    #define SERVER_IP @"192.168.1.21"
+    #define SERVER_IP @"192.168.1.9"
 #endif
 
 

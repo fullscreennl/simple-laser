@@ -322,7 +322,7 @@ def test():
 if __name__ == "__main__":
     test()
     SimpleLaser("test_laser_job.eps")
-    command = "scp laserjob.bin rpi@192.168.1.21:/home/rpi/simplelaser/laserjob.bin"
+    command = "scp laserjob.bin rpi@192.168.1.9:/home/rpi/simplelaser/laserjob.bin"
     res = os.system(command)
     if res:
         print "ERROR"
