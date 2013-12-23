@@ -28,10 +28,8 @@
         //NSLog(@"Could not find Settings.bundle");
         return;
     }
-    
     NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
     NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
-    
     NSMutableDictionary *defaultsToRegister = [NSMutableDictionary dictionaryWithCapacity:[preferences count] ];
     for(NSDictionary *prefSpecification in preferences)
     {
@@ -40,12 +38,9 @@
         {
             [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
             NSLog(@"key %@",key);
-            NSLog(@"key %@",key);
         }
     }
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
- // [defaultsToRegister release];
 }
 
 
