@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90CA0EBA186891AB00D5AD1C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 90CA0EB9186891AB00D5AD1C /* Settings.bundle */; };
 		FA24205B1864524700FBD47D /* button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205A1864524700FBD47D /* button_bg.png */; };
 		FA24205E1864581800FBD47D /* button_bg_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205C1864581800FBD47D /* button_bg_blue.png */; };
 		FA24205F1864581800FBD47D /* button_bg_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FA24205D1864581800FBD47D /* button_bg_green.png */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90CA0EB9186891AB00D5AD1C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 		FA24205A1864524700FBD47D /* button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg.png; sourceTree = "<group>"; };
 		FA24205C1864581800FBD47D /* button_bg_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_blue.png; sourceTree = "<group>"; };
 		FA24205D1864581800FBD47D /* button_bg_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg_green.png; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				FAB8BB7D186057D700C555C3 /* SLViewController.h */,
 				FAB8BB7E186057D700C555C3 /* SLViewController.m */,
 				FAB8BB80186057D700C555C3 /* Images.xcassets */,
+				90CA0EB9186891AB00D5AD1C /* Settings.bundle */,
 				FAB8BB6F186057D700C555C3 /* Supporting Files */,
 			);
 			path = simplelaser;
@@ -256,6 +259,7 @@
 				FA24205F1864581800FBD47D /* button_bg_green.png in Resources */,
 				FA242061186458E100FBD47D /* button_bg_yellow.png in Resources */,
 				FAB8BB7C186057D700C555C3 /* Main.storyboard in Resources */,
+				90CA0EBA186891AB00D5AD1C /* Settings.bundle in Resources */,
 				FA242063186459A900FBD47D /* button_bg_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

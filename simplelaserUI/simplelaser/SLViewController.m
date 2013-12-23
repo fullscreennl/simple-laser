@@ -9,11 +9,11 @@
 #import "SLViewController.h"
 #import "GCDAsyncSocket.h"
 
-#if TARGET_IPHONE_SIMULATOR
-    #define SERVER_IP @"127.0.0.1"
-#else
-    #define SERVER_IP @"192.168.1.9"
-#endif
+//#if TARGET_IPHONE_SIMULATOR
+//    #define SERVER_IP @"127.0.0.1"
+//#else
+//    #define SERVER_IP @"192.168.1.9"
+//#endif
 
 
 
@@ -32,12 +32,13 @@
 -(void)connect{
     
     NSError *error = nil;
-    if (![asyncSocket connectToHost:SERVER_IP onPort:20001 withTimeout:3.0 error:&error])
+    NSString *ipAddress = [[NSUserDefaults standardUserDefaults] stringForKey:@"raspberryPi"];
+    if (![asyncSocket connectToHost:ipAddress onPort:20001 withTimeout:3.0 error:&error])
     {
         NSLog(@"ERROR %@",error);
         [asyncSocket disconnect];
     }else{
-        NSLog(@"OK trying to connect");
+        NSLog(@"OK trying to connect @ %@",ipAddress);
     }
     
 }
