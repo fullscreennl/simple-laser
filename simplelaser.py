@@ -19,6 +19,7 @@ COLOR_TO_POWER_MAP = {
                         'silver':1,
                         'gray':2,
                         'black':3,
+                        '':3, # viacad color if black (no stroke)
                         '#288cf0':3, # viacad color if black background
                         'red':4,
                         'maroon':5,
