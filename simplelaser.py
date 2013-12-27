@@ -1,4 +1,5 @@
 import os
+import sys
 import string
 import math
 import Image, ImageDraw
@@ -8,11 +9,10 @@ import struct
 import traceback
 from time import gmtime, strftime
 
-
+RASPBERRYPI_ADDRESS = "192.168.1.9"
 MACHINE_SIZE = (1250,900)
-
 STEPS_PER_MM = (1.0 / 0.022500000000000 , 1.0 /  0.011250000000000)
-
+SIMULATOR_PIXELS_PER_MM = 5
 COLOR_TO_POWER_MAP = {  
                         
                         'white':0,
@@ -34,7 +34,6 @@ COLOR_TO_POWER_MAP = {
                         'purple':15
                         }
 
-SIMULATOR_PIXELS_PER_MM = 5
 
 class TimedLog:
 
@@ -321,12 +320,16 @@ def test():
 
 if __name__ == "__main__":
     test()
-    SimpleLaser("test_laser_job.eps")
-    command = "scp laserjob.bin rpi@192.168.1.9:/home/rpi/simplelaser/laserjob.bin"
+    try:
+        epsfile = sys.argv[1]
+    except IndexError:
+        print "Please provide eps file as first arg, example: python simplelaser.py laserjob.eps"
+        os._exit(1)
+    SimpleLaser(epsfile)
+    command = "scp laserjob.bin rpi@"+RASPBERRYPI_ADDRESS+":/home/rpi/simplelaser/laserjob.bin"
     res = os.system(command)
     if res:
-        print "ERROR"
-        print "auto scp failed, no key or host down?"
+        print "ERROR: auto scp failed, no key or host down?"
     else:
         print "Success, laserjob ready."
     Simulator()
