@@ -47,7 +47,7 @@ This solution makes use of the following software/libraries:
 
 ###Connecting the dac
 
-TODO: *Jeroen kun je dit even typen?*
+![Alt text](https://raw.github.com/fullscreennl/simple-laser/master/images/dac_scheme_view.png "Wiring scheme of DAC for anolog laser power contorls.")
 
 ###Starting the server
 
