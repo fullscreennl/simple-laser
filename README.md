@@ -5,7 +5,7 @@ Control a laser cutter with Raspberry Pi.
 
 What is this?
 =============
-This is an conversion of a 100w chinese lasercutter from a Leetro based machine with Lasercut 5.3 software to a simple system with a Raspberry Pi and and iPod touch.
+This is an conversion of a 100w chinese lasercutter from a Leetro based machine with Lasercut 5.3 software to a simple system with a Raspberry Pi and iPod touch.
 
 *Removed Leetro components*
 ![Alt text](https://raw.github.com/fullscreennl/simple-laser/master/images/leetro.jpg "removed leetro parts.")
@@ -15,7 +15,7 @@ This is an conversion of a 100w chinese lasercutter from a Leetro based machine 
 
 Why?
 ====
-At Fullscreen.nl we are building our fablab and we just didn't want to work with Lasercut 5.3 a Windows PC and a Softdog anymore. Lasercut is required to control the Leetro MPC 6525. It requires a windows PC and a 'softdog' USB dongle. We had problems with complex cuttings paths, a bug in the software or the controller caused some paths not to close. We were also fed up with the *'Softdog error'*, *'Comunication has broken for timeout'* and *'Motioncard and softdog no same'* error messages.
+At Fullscreen.nl we are building our fablab and we just didn't want to work with Lasercut 5.3 a Windows PC and a Softdog anymore. Lasercut is required to control the Leetro MPC 6525. It requires a windows PC and a 'softdog' USB dongle. We had problems with complex cuttings paths, a bug in the software or the controller caused some paths not to close. We were also fed up with the *'Softdog error'*, *'Communication has broken for timeout'* and *'Motioncard and softdog no same'* error messages.
 
 We wanted to design in Viacad on a mac and simply have it cut on the machine. We don't do engraving. We mainly cut MDF and plywood. We wanted a simple linecolor to laserpower mapping.
 
@@ -30,7 +30,7 @@ This software has 4 main components:
 
 3) A driver written in C `driver.c`
 
-4) A script wich generates machine instructions from cad drawings. `simplelaser.py`
+4) A script which generates machine instructions from cad drawings. `simplelaser.py`
 
 ###Dependencies
 This solution makes use of the following software/libraries:
