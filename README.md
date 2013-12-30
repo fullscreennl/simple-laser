@@ -45,8 +45,9 @@ This solution makes use of the following software/libraries:
 
 [RPi.GPIO](https://pypi.python.org/pypi/RPi.GPIO) for GPIO access with Python.
 
-###Connecting the dac
+###Connecting the DAC
 
+Our laser power was controlled via an analog signal from the Leetro board that swings from 0 - 5 Volt, where 5 Volt gives you full laserpower, in our case 100 Watt. We came up with a solution to replace this output and it involves using a 8 bit parallel DA converter the [AD7302B](http://www.analog.com/static/imported-files/data_sheets/AD7302.pdf). In order not to sacrifice all our pi's I/O we reduced the resolution of this converter to 4 bits. This gives us 16 levels of power which we find sufficient. You might wonder why parallel, we did this to keep things easy in our software, the DAC clock is now automatically in sync with the stepper clocks so we keep everything at the same frequency and in sync whilst cutting.         
 ![Alt text](https://raw.github.com/fullscreennl/simple-laser/master/images/dac_scheme_view.png "Wiring scheme of DAC for anolog laser power contorls.")
 
 ###Starting the server
