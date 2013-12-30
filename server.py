@@ -135,9 +135,9 @@ class Channel(asynchat.async_chat):
         self.laserOn(False)
 
     def laserOn(self,on=False):
-        GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.LOW)
-        GPIO.output(POWER_1, GPIO.LOW)
+        GPIO.output(POWER_4, GPIO.LOW)
+        GPIO.output(POWER_3, GPIO.LOW)
+        GPIO.output(POWER_2, GPIO.LOW)
         if on:
             GPIO.output(POWER_1, GPIO.HIGH)
         else:
