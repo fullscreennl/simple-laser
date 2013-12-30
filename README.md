@@ -33,7 +33,7 @@ This software has 4 main components:
 4) A script wich generates machine instructions from cad drawings. `simplelaser.py`
 
 ###Dependencies
-This solution makes us of the following software/libraries:
+This solution makes use of the following software/libraries:
 
 [pstoedit](http://www.pstoedit.net) for converting EPS files to flattened svg.
 
