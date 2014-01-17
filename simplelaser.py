@@ -132,8 +132,12 @@ class Model:
             delta_y = p[1] - prev[1]
             state = p[2]
             power = p[3]
+            if state == 0:
+                speed = 300
+            else:
+                speed = 100
             if abs(delta_x) + abs(delta_y) > 0:
-                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power,100)
+                numpy_arr = self.expandWithLaserStateAndPower(delta_x,delta_y,state,power,speed)
                 self.steps = np.concatenate((self.steps,numpy_arr))
             prev = p
 
@@ -328,11 +332,11 @@ if __name__ == "__main__":
         os._exit(1)
     SimpleLaser(epsfile)
     command = "scp laserjob.bin rpi@"+RASPBERRYPI_ADDRESS+":/home/rpi/simplelaser/laserjob.bin"
-    res = os.system(command)
-    if res:
-        print "ERROR: auto scp failed, no key or host down?"
-    else:
-        print "Success, laserjob ready."
+    # res = os.system(command)
+    # if res:
+    #     print "ERROR: auto scp failed, no key or host down?"
+    # else:
+    #     print "Success, laserjob ready."
     Simulator()
     TimedLog("done ...")
 
