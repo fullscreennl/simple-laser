@@ -32,7 +32,7 @@ This software has 4 main components:
 
 4) A script which generates machine instructions from cad drawings. `simplelaser.py`
 
-###Dependencies
+### Dependencies
 This solution makes use of the following software/libraries:
 
 [pstoedit](http://www.pstoedit.net) for converting EPS files to flattened svg.
@@ -45,13 +45,13 @@ This solution makes use of the following software/libraries:
 
 [RPi.GPIO](https://pypi.python.org/pypi/RPi.GPIO) for GPIO access with Python.
 
-###Connecting the DAC
+### Connecting the DAC
 
 The laser power was originally controlled via an analog signal from the Leetro board that swings from 0 - 5 Volt, where 5 Volt gives you full laserpower, in our case 100 Watt. We came up with a solution to replace this output and it involves using a 8 bit parallel DA converter the [AD7302B](http://www.analog.com/static/imported-files/data_sheets/AD7302.pdf). In order not to sacrifice all our pi's I/O we reduced the resolution of this converter to 4 bits. This gives us 16 levels of power which we find sufficient. You might wonder why use a parallel DAC? We did this to keep things easy in our software, the DAC clock is now automatically in sync with the stepper clocks so we keep everything at the same frequency and in sync whilst cutting.
        
 ![Alt text](https://raw.github.com/fullscreennl/simple-laser/master/images/dac_scheme_view.png "Wiring scheme of DAC for anolog laser power contorls.")
 
-###Starting the server
+### Starting the server
 
 Install the startup script `startlaserservice.sh` to run the server as a deamon.
 Read [here](http://blog.scphillips.com/2013/07/getting-a-python-script-to-run-in-the-background-as-a-service-on-boot/) how to do it. Reboot the Pi.
@@ -72,7 +72,7 @@ manually:
         
 If the driver has finished the cutting job it will restart the server and exit, so the iPod touch UI becomes active again.
 
-###Compiling the driver
+### Compiling the driver
 
 There is no need for a cross compiler this will build quickly on the Raspberry Pi.
 
@@ -80,11 +80,11 @@ There is no need for a cross compiler this will build quickly on the Raspberry P
 	
 	gcc -I/usr/xenomai/include -Ibcm2835-1.25 bcm2835-1.25/bcm2835.c driver.c -L/usr/xenomai/lib -lnative -lxenomai -o driver
 	
-###Building iPod touch UI
+### Building iPod touch UI
 
 Open the folder *simplelaserUI* , open the xcode-project and build it to an iOS device. (it is designed to run on iPod touch 3.5 inch with iOS 6). The ip-address of the Raspberry Pi can be entered through settings.
 
-###Testing the workflow
+### Testing the workflow
 
 Export your toolpaths as .eps file and run:
 
